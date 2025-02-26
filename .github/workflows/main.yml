@@ -1,1 +1,21 @@
-curl -sSf https://sshx.io/get | sh -s run
+name: SSHX in GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sshx-session:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install SSHX
+        run: |
+          curl -fsSL https://sshx.io/get | sh
+
+      - name: Start SSHX Session
+        run: |
+          sshx
